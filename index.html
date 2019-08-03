@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Psychic Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+
+    <h1>The Psychic Game</h1>
+
+    <h2>Guess what letter I'm thinking of</h2>
+<hr>
+    <p>Wins: <span id="wins"></span></p>
+    <p>Losses:<span id= "losses"></span></p>
+    <p>Guesses:<span id="guessesLeft"></span></p>
+    <p>You Guessed: <span id="youGuessed"></span></p>
+    
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+
+        // var list = $('ul');
+        // var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        var wins = 0;
+        var losses = 0;
+        var guesses = [];
+        var guessesLeft = 10;
+
+        $('#wins').text(wins);
+        $('#losses').text(losses);
+        $('#guessesLeft').text(guessesLeft);
+
+
+        // var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        // var letter = letters[Math.floor(Math.random() * letters.length)];
+        // console.log(letter);
+
+        function randLetter(){
+            var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+            letter = letters[Math.floor(Math.random() * letters.length)];
+                console.log(letter);
+    //             return letter;
+    }
+
+        function resetGame(){
+                guessesLeft = 10;
+                $('#guessesLeft').text(guessesLeft);
+                randLetter(letter);
+                var guesses = [];
+                $('#youGuessed').empty();
+
+        }
+
+        randLetter();
+
+
+        $(document).on('keypress',function() {
+            var k = event.key;
+
+            
+
+            guessesLeft--;
+            $('#guessesLeft').text(guessesLeft);
+
+            if (!guesses.includes(k)){
+                guesses.push(event.key);
+                $('#youGuessed').text(guesses);
+            }
+
+            if (letter == k){
+                wins++;
+                $('#wins').text(wins);
+                resetGame();
+            
+
+            } else if (guessesLeft == 0){
+                losses++;
+                $('#losses').text(losses);
+                resetGame();
+        
+                
+            }
+            
+
+        });
+
+
+        // This works
+        // function letterCheck(letter) {
+        //     if (randLetter(letter) == 'a') {
+        //         alert("the letters match");
+        //         return true;
+        //     } else {
+        //         console.log("not a match");
+        //         return false;
+        //     }
+        // }
+
+
+        //  NOW IT WORKS (added return to lettercheck)
+        // function scoreLogic() {
+        //     if (guesses == 0) {
+        //         losses++;
+        //         console.log("Loses:" + losses);
+        //         guesses = 10;
+        //     }
+        //     if (letterCheck(true)) {
+        //         wins++;
+        //         console.log("Wins:" + wins);
+        //     } else {
+        //         guesses--;
+        //         console.log("Guesses:" + guesses);
+        //     }
+        // }
+        //  1. Firgure out key press (replacing 'a' with user inputed keyboard-stroke). ||  2. Figure out adding the data to the visible page. Thats it. 
+        // scoreLogic();
+
+        // var guesses = [];
+        // document.onkeypress = function(){
+        //     guesses.push(event.key);
+        //     document.querySelector('#demo').innerText = guesses;
+        //     console.log(eventkey);
+        // }
+
+
+    </script>
+
+</body>
+
+</html>
